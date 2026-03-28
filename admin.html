@@ -35,6 +35,40 @@ data.forEach(user => {
   row.insertCell(3).innerText = user.code;
 });
 </script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  authDomain: "jvdi---asbl-42f24.firebaseapp.com",
+  projectId: "jvdi---asbl-42f24",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function chargerInscriptions() {
+  const querySnapshot = await getDocs(collection(db, "inscriptions"));
+  const container = document.getElementById("liste");
+
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
+    container.innerHTML += `
+      <div style="border:1px solid #ccc; padding:10px; margin:10px;">
+        <p><b>Nom:</b> ${data.nom}</p>
+        <p><b>Téléphone:</b> ${data.tel}</p>
+        <p><b>Email:</b> ${data.email}</p>
+        <p><b>Code:</b> ${data.code}</p>
+      </div>
+    `;
+  });
+}
+<div id="liste"></div>
+
+<script type="module">
+  chargerInscriptions();
+</script>
 
 </body>
 </html>
