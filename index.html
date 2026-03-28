@@ -1,5 +1,31 @@
 <!DOCTYPE html>
 <html>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  authDomain: "jvdi---asbl.firebaseapp.com",
+  projectId: "jvdi---asbl",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.inscrire = async function() {
+  let nom = document.getElementById("nom").value;
+  let tel = document.getElementById("tel").value;
+  let email = document.getElementById("email").value;
+  let code = document.getElementById("code").value;
+
+  await addDoc(collection(db, "inscriptions"), {
+    nom, tel, email, code, date: new Date()
+  });
+
+  alert("Inscription envoyée ✅");
+}
+</script>
 <head>
 <meta charset="UTF-8">
 <title>JVDI ASBL</title>
