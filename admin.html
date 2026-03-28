@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin JVDI</title>
+  <style>
+    body {font-family: Arial; background:#0b2e1e; color:white; padding:20px;}
+    table {width:100%; border-collapse: collapse; margin-top:20px;}
+    th, td {border:1px solid white; padding:10px; text-align:left;}
+    th {background:#198754;}
+  </style>
+</head>
+<body>
+
+<h1>📊 Admin - Inscriptions</h1>
+
+<table id="table">
+  <tr>
+    <th>Nom</th>
+    <th>Téléphone</th>
+    <th>Email</th>
+    <th>Code</th>
+  </tr>
+</table>
+
+<script>
+let data = JSON.parse(localStorage.getItem("inscriptions")) || [];
+
+let table = document.getElementById("table");
+
+data.forEach(user => {
+  let row = table.insertRow();
+  row.insertCell(0).innerText = user.nom;
+  row.insertCell(1).innerText = user.tel;
+  row.insertCell(2).innerText = user.email;
+  row.insertCell(3).innerText = user.code;
+});
+</script>
+
+</body>
+</html>
