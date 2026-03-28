@@ -1,16 +1,42 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>JVDI ASBL</title>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSy...",
+  authDomain: "jvdi---asbl.firebaseapp.com",
+  projectId: "jvdi---asbl",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.inscrire = async function(){
+let nom = document.getElementById("nom").value;
+let tel = document.getElementById("tel").value;
+let email = document.getElementById("email").value;
+let code = document.getElementById("code").value;
+
+await addDoc(collection(db, "inscriptions"), {
+nom, tel, email, code, date: new Date()
+});
+
+alert("Inscription + paiement enregistré ✅");
+}
+</script>
 
 <style>
-body{font-family:Arial;background:#0b1d13;color:#fff;text-align:center}
+body{background:#0b1d13;color:#fff;text-align:center;font-family:Arial}
 input{padding:10px;margin:5px;width:80%}
 button{padding:10px;background:#198754;color:#fff;border:none}
 </style>
+
 </head>
 
 <body>
@@ -23,40 +49,13 @@ button{padding:10px;background:#198754;color:#fff;border:none}
 <input id="tel" placeholder="Téléphone"><br>
 <input id="email" placeholder="Email"><br>
 
-<button onclick="inscrire()">S'inscrire</button>
+<h3>Paiement Airtel Money</h3>
+<p>Envoyer 50$ à :</p>
+<p><b>+243991829788</b><br>MUSHAGALUSA</p>
 
-<p id="msg"></p>
+<input id="code" placeholder="Code transaction"><br>
 
-<script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSy...",
-  authDomain: "jvdi---asbl.firebaseapp.com",
-  projectId: "jvdi---asbl",
-  storageBucket: "jvdi---asbl.appspot.com",
-  messagingSenderId: "828367445344",
-  appId: "1:828367445344:web:844b932c..."
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-window.inscrire = async function(){
-let nom = document.getElementById("nom").value;
-let tel = document.getElementById("tel").value;
-let email = document.getElementById("email").value;
-
-await addDoc(collection(db, "inscriptions"), {
-nom, tel, email, date: new Date()
-});
-
-document.getElementById("msg").innerText = "Inscription envoyée ✅";
-}
-
-</script>
+<button onclick="inscrire()">Valider inscription</button>
 
 </body>
 </html>
