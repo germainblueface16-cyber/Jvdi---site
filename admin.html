@@ -1,48 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin JVDI</title>
-  <style>
-    body {font-family: Arial; background:#0b2e1e; color:white; padding:20px;}
-    table {width:100%; border-collapse: collapse; margin-top:20px;}
-    th, td {border:1px solid white; padding:10px; text-align:left;}
-    th {background:#198754;}
-  </style>
+  <title>Admin - Inscriptions</title>
 </head>
-<body>
 
-<h1>📊 Admin - Inscriptions</h1>
+<body style="background:green;color:white;font-family:Arial">
 
-<table id="table">
+<h2>📊 Admin - Inscriptions</h2>
+
+<table border="1" width="100%">
   <tr>
     <th>Nom</th>
     <th>Téléphone</th>
     <th>Email</th>
     <th>Code</th>
   </tr>
+  <tbody id="liste"></tbody>
 </table>
 
-<script>
-let data = JSON.parse(localStorage.getItem("inscriptions")) || [];
-
-let table = document.getElementById("table");
-
-data.forEach(user => {
-  let row = table.insertRow();
-  row.insertCell(0).innerText = user.nom;
-  row.insertCell(1).innerText = user.tel;
-  row.insertCell(2).innerText = user.email;
-  row.insertCell(3).innerText = user.code;
-});
-</script>
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSy...",
+  apiKey: "AIzaSyCjNSHWLpFDdIHX3HrH51cjeLm7I-jWKzY",
   authDomain: "jvdi---asbl-42f24.firebaseapp.com",
   projectId: "jvdi---asbl-42f24",
+  storageBucket: "jvdi---asbl-42f24.appspot.com",
+  messagingSenderId: "323584503979",
+  appId: "1:323584503979:web:63668023ce90a0981a87ee"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -54,20 +41,20 @@ async function chargerInscriptions() {
 
   querySnapshot.forEach((doc) => {
     const data = doc.data();
+
     container.innerHTML += `
-      <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-        <p><b>Nom:</b> ${data.nom}</p>
-        <p><b>Téléphone:</b> ${data.tel}</p>
-        <p><b>Email:</b> ${data.email}</p>
-        <p><b>Code:</b> ${data.code}</p>
-      </div>
+      <tr>
+        <td>${data.nom}</td>
+        <td>${data.tel}</td>
+        <td>${data.email}</td>
+        <td>${data.code}</td>
+      </tr>
     `;
   });
 }
-<div id="liste"></div>
 
-<script type="module">
-  chargerInscriptions();
+chargerInscriptions();
+
 </script>
 
 </body>
