@@ -82,6 +82,51 @@ button{padding:10px;background:#198754;color:#fff;border:none}
 <input id="code" placeholder="Code transaction"><br>
 
 <button onclick="inscrire()">Valider inscription</button>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
+const firebaseConfig = {
+  apiKey: "AIzaSyCjNSHWLpFDdIHX3HrH51cjeLm7I-jWKzY",
+  authDomain: "jvdi---asbl-42f24.firebaseapp.com",
+  projectId: "jvdi---asbl-42f24",
+  storageBucket: "jvdi---asbl-42f24.firebasestorage.app",
+  messagingSenderId: "323584503979",
+  appId: "1:323584503979:web:63668023ce90a0981a87ee"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.inscrire = async function() {
+  <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCjNSHWLpFDdIHX3HrH51cjeLm7I-jWKzY",
+  authDomain: "jvdi---asbl-42f24.firebaseapp.com",
+  projectId: "jvdi---asbl-42f24",
+  storageBucket: "jvdi---asbl-42f24.firebasestorage.app",
+  messagingSenderId: "323584503979",
+  appId: "1:323584503979:web:63668023ce90a0981a87ee"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.inscrire = async function() {
+  let nom = document.getElementById("nom").value;
+  let tel = document.getElementById("tel").value;
+  let email = document.getElementById("email").value || "";
+  let code = document.getElementById("code").value;
+
+  await addDoc(collection(db, "inscriptions"), {
+    nom, tel, email, code, date: new Date()
+  });
+
+  alert("Inscription enregistrée avec succès ✅");
+}
+</script>
 </body>
 </html> 
