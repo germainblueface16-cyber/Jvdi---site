@@ -19,15 +19,14 @@
 </table>
 
 <script type="module">
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCjNSHWLpFDdIHX3HrH51cjeLm7I-jWKzY",
   authDomain: "jvdi---asbl-42f24.firebaseapp.com",
   projectId: "jvdi---asbl-42f24",
-  storageBucket: "jvdi---asbl-42f24.appspot.com",
+  storageBucket: "jvdi---asbl-42f24.firebasestorage.app",
   messagingSenderId: "323584503979",
   appId: "1:323584503979:web:63668023ce90a0981a87ee"
 };
@@ -39,23 +38,21 @@ async function chargerInscriptions() {
   const querySnapshot = await getDocs(collection(db, "inscriptions"));
   const container = document.getElementById("liste");
 
+  container.innerHTML = "";
+
   querySnapshot.forEach((doc) => {
     const data = doc.data();
 
     container.innerHTML += `
-      <tr>
-        <td>${data.nom}</td>
-        <td>${data.tel}</td>
-        <td>${data.email}</td>
-        <td>${data.code}</td>
-      </tr>
-    `;
+  <tr>
+    <td>${data.nom}</td>
+    <td>${data.tel}</td>
+    <td>${data.email}</td>
+    <td>${data.code}</td>
+  </tr>
+`;
   });
 }
 
 chargerInscriptions();
-
 </script>
-
-</body>
-</html>
