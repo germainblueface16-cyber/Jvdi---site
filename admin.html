@@ -43,12 +43,14 @@ async function chargerInscriptions() {
   querySnapshot.forEach((doc) => {
     const data = doc.data();
 
-    container.innerHTML += `<tr>
-<td>${data.nom}</td>
-<td>${data.tel}</td>
-<td>${data.email}</td>
-<td>${data.code}</td>
-</tr>`;
+    container.innerHTML += `
+<tr>
+  <td>${data.nom}</td>
+  <td>${data.tel}</td>
+  <td>${data.email}</td>
+  <td>${data.code}</td>
+</tr>
+`;
   });
 }
 
